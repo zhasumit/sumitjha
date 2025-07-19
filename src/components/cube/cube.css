@@ -1,0 +1,104 @@
+@keyframes animate {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.cube-wrapper {
+    width: 100%;
+    height: 100%;
+
+    /* Dynamic base size passed from TS */
+    --cube-size: 50px;
+
+    /* Derived variables */
+    --cube-side: calc(0.8 * var(--cube-size));
+    /* Side thickness */
+    --cube-gap: calc(0.8 * var(--cube-size));
+    /* Vertical spacing between spans */
+    --cube-x-offset: calc(1.4 * var(--cube-size));
+    /* X translation for columns */
+    --cube-y-offset: calc(1.3 * var(--cube-size));
+    /* Y translation for columns */
+}
+
+.container {
+    position: relative;
+    top: calc(-1.6 * var(--cube-size));
+    transform: skewY(-20deg);
+    animation: animate 5s linear infinite;
+}
+
+.cube {
+    position: relative;
+    z-index: 2;
+}
+
+.cube:nth-child(2) {
+    z-index: 1;
+    translate: calc(-1.2 * var(--cube-size)) calc(-1.2 * var(--cube-size));
+}
+
+.cube:nth-child(3) {
+    z-index: 3;
+    translate: calc(1.2 * var(--cube-size)) calc(1.2 * var(--cube-size));
+}
+
+.column {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: var(--cube-gap);
+    translate: calc(-1 * var(--cube-x-offset) * var(--x)) calc(-1 * var(--cube-y-offset) * var(--y));
+}
+
+.column span {
+    position: relative;
+    display: inline-block;
+    width: var(--cube-size);
+    height: var(--cube-size);
+    background: #dcdcdc;
+    z-index: calc(1 * var(--i));
+    transition: 1.5s;
+}
+
+.column span:hover {
+    transition: 0s;
+    background: #ef4149;
+    filter: drop-shadow(0 0 30px #ef4149);
+}
+
+.column span:hover::before,
+.column span:hover::after {
+    transition: 0s;
+    background: #ef4149;
+}
+
+.column span::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--cube-side));
+    width: var(--cube-side);
+    height: 100%;
+    background: #fff;
+    transform-origin: right;
+    transform: skewY(45deg);
+    transition: 1.5s;
+}
+
+.column span::after {
+    content: "";
+    position: absolute;
+    top: calc(-1 * var(--cube-side));
+    left: 0px;
+    width: 100%;
+    height: var(--cube-side);
+    background: #f2f2f2;
+    transform-origin: bottom;
+    transform: skewX(45deg);
+    transition: 1.5s;
+}
