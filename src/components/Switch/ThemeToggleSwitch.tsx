@@ -6,17 +6,18 @@ interface ThemeToggleSwitchProps {
     size?: number; // width in px, default 100
 }
 
+const STORAGE_KEY = "sumitjha-portfoliotheme";
+
 const ThemeToggleSwitch: React.FC<ThemeToggleSwitchProps> = ({ size = 100 }) => {
     const [isDark, setIsDark] = useState(false);
 
-    // Calculate sizes based on size prop
-    const height = Math.round(size / 2); // keep aspect ratio 2:1 (width:height)
-    const knobSize = Math.round(height * 0.8); // knob is 80% of height
-    const knobLeftUnchecked = 5; // padding-left in px
-    const knobLeftChecked = size - knobSize - 5; // width - knob - padding
+    const height = Math.round(size / 2);
+    const knobSize = Math.round(height * 0.8);
+    const knobLeftUnchecked = 5;
+    const knobLeftChecked = size - knobSize - 5;
 
     useEffect(() => {
-        const savedTheme = localStorage.getItem("theme");
+        const savedTheme = localStorage.getItem(STORAGE_KEY);
         if (savedTheme) {
             setIsDark(savedTheme === "dark");
             document.documentElement.setAttribute("data-theme", savedTheme);
@@ -31,7 +32,7 @@ const ThemeToggleSwitch: React.FC<ThemeToggleSwitchProps> = ({ size = 100 }) => 
         const newTheme = isDark ? "light" : "dark";
         setIsDark(!isDark);
         document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
+        localStorage.setItem(STORAGE_KEY, newTheme);
     };
 
     return (
@@ -46,7 +47,6 @@ const ThemeToggleSwitch: React.FC<ThemeToggleSwitchProps> = ({ size = 100 }) => 
                 checked={isDark}
                 onChange={toggleTheme}
             />
-            {/* toggle knob */}
             <div
                 className={`
           relative bg-white peer-checked:bg-zinc-500 rounded-full 
@@ -67,18 +67,17 @@ const ThemeToggleSwitch: React.FC<ThemeToggleSwitchProps> = ({ size = 100 }) => 
                         height: knobSize,
                         top: (height - knobSize) / 2,
                         left: isDark ? knobLeftChecked : knobLeftUnchecked,
-                        backgroundColor: isDark ? "black" : "#facc15", // black or yellow-400 hex
+                        backgroundColor: isDark ? "black" : "#facc15",
                         transition: "left 0.3s ease, background-color 0.3s ease",
                     }}
                 />
             </div>
 
-            {/* Sun icon on left */}
             <svg
                 height={height * 0.5}
                 width={height * 0.5}
                 viewBox="0 0 24 24"
-                className={`absolute left-[10px] transition-colors duration-300 pointer-events-none`}
+                className="absolute left-[10px] transition-colors duration-300 pointer-events-none"
                 style={{
                     top: (height - height * 0.5) / 2,
                     fill: "white",
@@ -89,12 +88,11 @@ const ThemeToggleSwitch: React.FC<ThemeToggleSwitchProps> = ({ size = 100 }) => 
                 <path d="M12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5,5,2.24,5,5-2.24,5-5,5ZM13,0h-2V5h2V0Zm0,19h-2v5h2v-5ZM5,11H0v2H5v-2Zm19,0h-5v2h5v-2Zm-2.81-6.78l-1.41-1.41-3.54,3.54,1.41,1.41,3.54-3.54ZM7.76,17.66l-1.41-1.41-3.54,3.54,1.41,1.41,3.54-3.54Zm0-11.31l-3.54-3.54-1.41,1.41,3.54,3.54,1.41-1.41Zm13.44,13.44l-3.54-3.54-1.41,1.41,3.54,3.54,1.41-1.41Z" />
             </svg>
 
-            {/* Moon icon on right */}
             <svg
                 height={height * 0.5}
                 width={height * 0.5}
                 viewBox="0 0 24 24"
-                className={`absolute right-[10px] transition-colors duration-300 pointer-events-none`}
+                className="absolute right-[10px] transition-colors duration-300 pointer-events-none"
                 style={{
                     top: (height - height * 0.5) / 2,
                     fill: isDark ? "white" : "black",

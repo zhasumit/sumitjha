@@ -18,7 +18,6 @@ const Skills = () => {
                     description="python python python python python python python "
                     users={2}
                     teams={3}
-                    backgroundColor="" // Example background color in hex
                 />
                 <SkillCard
                     icon={<FastAPIIcon />}
@@ -26,7 +25,6 @@ const Skills = () => {
                     description="python python python python python python python "
                     users={2}
                     teams={3}
-                    backgroundColor="" // Example background color in hex
                 />
                 <SkillCard
                     icon={<RubyIcon />}
@@ -34,7 +32,6 @@ const Skills = () => {
                     description="python python python python python python python "
                     users={2}
                     teams={3}
-                    backgroundColor="" // Example background color in hex
                 />
                 <SkillCard
                     icon={<RailsIcon />}
@@ -42,7 +39,6 @@ const Skills = () => {
                     description="python python python python python python python "
                     users={2}
                     teams={3}
-                    backgroundColor="" // Example background color in hex
                 />
                 <SkillCard
                     icon={<JavaScriptIcon />}
@@ -50,7 +46,6 @@ const Skills = () => {
                     description="python python python python python python python "
                     users={2}
                     teams={3}
-                    backgroundColor="" // Example background color in hex
                 />
                 <SkillCard
                     icon={<ReactLogo />}
@@ -58,7 +53,6 @@ const Skills = () => {
                     description="python python python python python python python "
                     users={2}
                     teams={3}
-                    backgroundColor="" // Example background color in hex
                 />
 
             </div>
